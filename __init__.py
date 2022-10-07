@@ -22,7 +22,7 @@ def print_size(*args):
     """保存時に実行され、ファイルサイズを出力"""
     pth = Path(bpy.data.filepath)
     st = pth.stat()
-    print(f"# {pth.name} {st.st_size / 1000_000:.2f} MB")
+    print(f"# {st.st_size / 1000_000:.2f} MB {pth.name}")
 
 
 def register():
