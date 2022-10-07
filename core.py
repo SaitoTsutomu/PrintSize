@@ -1,9 +1,13 @@
+from pathlib import Path
+
 import bpy
 
 
 def print_size(*args):
     """保存時に実行され、ファイルサイズを出力"""
-    print(args)
+    pth = Path(bpy.data.filepath)
+    st = pth.stat()
+    print(f"# {pth.name} {st.st_size / 1000_000:.2f} MB")
 
 
 def register():
@@ -13,4 +17,4 @@ def register():
 
 def unregister():
     """追加削除用（クラス削除は、register_class内で実行）"""
-    bpy.types.VIEW3D_MT_object.remove(print_size)
+    bpy.app.handlers.save_post.remove(print_size)
